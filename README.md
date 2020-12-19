@@ -49,6 +49,8 @@ Transition JS has the following option
       }
   });
 
-  mytransition.startTranstition(500);
+  mytransition.startTranstition(function(){
+      /* do something on start */
+  }, 500);
 </script>
 ```
