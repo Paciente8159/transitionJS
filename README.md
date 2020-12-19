@@ -1,7 +1,7 @@
 # transitionJS
  A javascript class to perform transitions with custom effect. This works in a similar way to CSS transition, but you can control the rendering logic perform custom effects.
 
-# transitionJS options
+## transitionJS options
  Transition JS has the following option
 
 * Transition options
@@ -12,9 +12,9 @@
   * transitionEasing - `Type: null | string | function (default null)` This is where you choose the transition easing function. If not declared by default transitionJS will do a linear transition. In alternative you can include the transition.easings extension and use one of the transitions by calling it by reference or by name (via string). A third alternative is to declare your own transition function.
   * transitionEnded - `Type: function (default null)` If declared this function will be called when the transition as finnished.
 
-# transitionJS exemples
+## transitionJS exemples
 
-## add a 500ms transition with linear easing
+### add a 500ms transition with linear easing
 ```html
     <script type="application/javascript" src="transition.js"></script>
     <script type="application/javascript">
@@ -27,7 +27,7 @@
     </script>
 ``` 
 
-## add a 300ms transition with easeInOutQuad easing and a transitionEnded callback
+### add a 300ms transition with easeInOutQuad easing and a transitionEnded callback
 ```html
     <script type="application/javascript" src="transition.js"></script>
     <script type="application/javascript" src="transition.easings.js"></script>
