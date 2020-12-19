@@ -20,24 +20,39 @@ function transitionJS(options) {
   this.easing = this.selectEasing(this.options.transitionEasing);
 }
 
-transitionJS.prototype.now = function(){
-  if(performance.now){
+transitionJS.prototype.now = function () {
+  if (performance.now) {
     return performance.now();
   }
 
   if (Date.now) {
     return Date.Now();
   }
-  
-  return new Date().getTime();
-}
 
-transitionJS.prototype.startTransition = function () {
-  this.lastTime = 0;
-  this.startTime = this.now();
-  this.lastTime = this.startTime;
-  this.rendering = true;
-  this.run();
+  return new Date().getTime();
+};
+
+transitionJS.prototype.startTransition = function (
+  transitionDelayCallback,
+  transitionDelay
+) {
+  if (transitionDelay) {
+    setTimeout(
+      function () {
+        this.startTransition(transitionDelayCallback);
+      }.bind(this),
+      transitionDelay
+    );
+  } else {
+    this.lastTime = 0;
+    this.startTime = this.now();
+    this.lastTime = this.startTime;
+    this.rendering = true;
+    if (transitionDelayCallback) {
+      transitionDelayCallback();
+    }
+    this.run();
+  }
 };
 
 transitionJS.prototype.cancelTransition = function () {
@@ -50,15 +65,18 @@ transitionJS.prototype.cancelTransition = function () {
 transitionJS.prototype.run = function () {
   this.transitionID = requestAnimationFrame(this.run.bind(this));
   var current = this.now();
-  var elapsed = (current - this.lastTime);
+  var elapsed = current - this.lastTime;
   //nothing to render leave
-  if(elapsed < this.frameTime){
+  if (elapsed < this.frameTime) {
     return;
   }
 
-  var elapsed_total = Math.min(this.options.transitionDuration, (current - this.startTime));
+  var elapsed_total = Math.min(
+    this.options.transitionDuration,
+    current - this.startTime
+  );
   var percentage = elapsed_total / this.options.transitionDuration;
-  var framepercentage = (!this.easing) ? percentage : this.easing(percentage);
+  var framepercentage = !this.easing ? percentage : this.easing(percentage);
 
   if (this.options.renderFrame) {
     this.options.renderFrame(percentage, framepercentage);
@@ -72,7 +90,7 @@ transitionJS.prototype.run = function () {
   }
 
   this.lastTime = current;
-  this.rendering = (percentage != 1);
+  this.rendering = percentage != 1;
 };
 
 transitionJS.prototype.selectEasing = function (easing) {
