@@ -26,7 +26,7 @@ transitionJS.prototype.now = function () {
   }
 
   if (Date.now) {
-    return Date.Now();
+    return Date.now();
   }
 
   return new Date().getTime();
