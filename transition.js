@@ -82,7 +82,7 @@ transitionJS.prototype.run = function () {
     this.options.renderFrame(percentage, framepercentage);
   }
 
-  if (percentage == 1 && !this.rendering) {
+  if (percentage == 1 && this.rendering) {
     cancelAnimationFrame(this.transitionID);
     if (this.options.transitionEnded) {
       this.options.transitionEnded();
@@ -91,6 +91,10 @@ transitionJS.prototype.run = function () {
 
   this.lastTime = current;
   this.rendering = percentage != 1;
+};
+
+transitionJS.prototype.isRunning = function () {
+  return this.rendering;
 };
 
 transitionJS.prototype.selectEasing = function (easing) {

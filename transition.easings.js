@@ -49,15 +49,15 @@ transitionJS.prototype.easeInOutQuint = function (x) {
 };
 
 transitionJS.prototype.easeInSine = function (x) {
-  return 1 - Math.cos((x * PI) / 2);
+  return 1 - Math.cos((x * Math.PI) / 2);
 };
 
 transitionJS.prototype.easeOutSine = function (x) {
-  return Math.sin((x * PI) / 2);
+  return Math.sin((x * Math.PI) / 2);
 };
 
 transitionJS.prototype.easeInOutSine = function (x) {
-  return -(Math.cos(PI * x) - 1) / 2;
+  return -(Math.cos(Math.PI * x) - 1) / 2;
 };
 
 transitionJS.prototype.easeInExpo = function (x) {
@@ -93,14 +93,20 @@ transitionJS.prototype.easeInOutCirc = function (x) {
 };
 
 transitionJS.prototype.easeInBack = function (x) {
+  const c1 = 1.70158;
+  const c3 = c1 + 1;
   return c3 * x * x * x - c1 * x * x;
 };
 
 transitionJS.prototype.easeOutBack = function (x) {
+  const c1 = 1.70158;
+  const c3 = c1 + 1;
   return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
 };
 
 transitionJS.prototype.easeInOutBack = function (x) {
+  const c1 = 1.70158;
+  const c2 = c1 * 1.525;
   return x < 0.5
     ? (Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
     : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
@@ -148,8 +154,8 @@ transitionJS.prototype.easeOutBounce = function (x) {
 };
 
 transitionJS.prototype.easeInBounce = function (x) {
-    return 1 - this.easeOutBounce(1 - x);
-  };
+  return 1 - this.easeOutBounce(1 - x);
+};
 
 transitionJS.prototype.easeInOutBounce = function (x) {
   return x < 0.5
