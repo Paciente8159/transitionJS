@@ -49,15 +49,15 @@ transitionJS.prototype.easeInOutQuint = function (x) {
 };
 
 transitionJS.prototype.easeInSine = function (x) {
-  return 1 - Math.cos((x * PI) / 2);
+  return 1 - Math.cos((x * Math.PI) / 2);
 };
 
 transitionJS.prototype.easeOutSine = function (x) {
-  return Math.sin((x * PI) / 2);
+  return Math.sin((x * Math.PI) / 2);
 };
 
 transitionJS.prototype.easeInOutSine = function (x) {
-  return -(Math.cos(PI * x) - 1) / 2;
+  return -(Math.cos(Math.PI * x) - 1) / 2;
 };
 
 transitionJS.prototype.easeInExpo = function (x) {
@@ -148,8 +148,8 @@ transitionJS.prototype.easeOutBounce = function (x) {
 };
 
 transitionJS.prototype.easeInBounce = function (x) {
-    return 1 - this.easeOutBounce(1 - x);
-  };
+  return 1 - this.easeOutBounce(1 - x);
+};
 
 transitionJS.prototype.easeInOutBounce = function (x) {
   return x < 0.5
