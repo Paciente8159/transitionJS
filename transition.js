@@ -82,7 +82,7 @@ transitionJS.prototype.run = function () {
     this.options.renderFrame(percentage, framepercentage);
   }
 
-  if (percentage == 1 && !this.rendering) {
+  if (percentage == 1 && this.rendering) {
     cancelAnimationFrame(this.transitionID);
     if (this.options.transitionEnded) {
       this.options.transitionEnded();
