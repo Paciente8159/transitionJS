@@ -44,7 +44,6 @@ transitionJS.prototype.startTransition = function (
       transitionDelay
     );
   } else {
-    this.lastTime = 0;
     this.startTime = this.now();
     this.lastTime = this.startTime;
     this.rendering = true;
@@ -62,6 +61,15 @@ transitionJS.prototype.cancelTransition = function () {
   this.startTime = 0;
 };
 
+transitionJS.prototype.restartTransition = function () {
+  if (this.rendering) {
+    this.startTime = this.now();
+    this.lastTime = this.startTime;
+  } else {
+    this.startTransition();
+  }
+};
+
 transitionJS.prototype.run = function () {
   this.transitionID = requestAnimationFrame(this.run.bind(this));
   var current = this.now();
@@ -75,6 +83,7 @@ transitionJS.prototype.run = function () {
     this.options.transitionDuration,
     current - this.startTime
   );
+
   var percentage = elapsed_total / this.options.transitionDuration;
   var framepercentage = !this.easing ? percentage : this.easing(percentage);
 
